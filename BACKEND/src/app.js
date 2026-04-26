@@ -17,6 +17,8 @@ import aiRoutes from "./routes/ai.route.js"
 import adminRoutes from "./routes/admin.route.js"
 import paymentRoutes from "./routes/payment.route.js"
 
+import path from "path";
+
 const app = express()
 
 app.use(express.json({ limit: '10mb' }))
@@ -30,6 +32,8 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use("/api/auth", authRoutes)
 app.use("/api/products", productRoutes)
@@ -45,5 +49,9 @@ app.use("/api/ai", aiRoutes)
 
 app.use("/api/admin", adminRoutes)
 app.use("/api/payment", paymentRoutes)
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 export default app;
