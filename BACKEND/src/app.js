@@ -18,8 +18,12 @@ import adminRoutes from "./routes/admin.route.js"
 import paymentRoutes from "./routes/payment.route.js"
 
 import path from "path";
+import { fileURLToPath } from "url"
 
 const app = express()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
@@ -51,7 +55,7 @@ app.use("/api/admin", adminRoutes)
 app.use("/api/payment", paymentRoutes)
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
+  res.sendFile(path.join(__dirname, "../public/index.html"))
+})
 
 export default app;
