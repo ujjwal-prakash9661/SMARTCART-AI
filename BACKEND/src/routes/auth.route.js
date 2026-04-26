@@ -21,7 +21,7 @@ router.get("/google", passport.authenticate("google", { scope : ["profile", "ema
 router.get("/google/callback", passport.authenticate("google", { session : false}), (req, res) => {
     const token = generateToken(req.user._id);
     // Redirect to frontend with token
-    res.redirect(`http://localhost:5173/auth?token=${token}`);
+    res.redirect(`https://smartcart-ai-vvqe.onrender.com/auth?token=${token}`);
 })
 
 export default router
