@@ -54,7 +54,7 @@ app.use("/api/ai", aiRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/payment", paymentRoutes)
 
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"))
 })
 
